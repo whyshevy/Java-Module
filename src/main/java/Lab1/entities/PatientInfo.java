@@ -1,4 +1,4 @@
-package Lab1.model;
+package Lab1.entities;
 
 
 public class PatientInfo {
@@ -11,7 +11,7 @@ public class PatientInfo {
     private int medicalCardNumber;
     private String diagnosis;
 
-    PatientInfo(int identificationNumber, String name, String surname, String patronymic, String address, long phoneNumber, int medicalCardNumber, String diagnosis) {
+    public PatientInfo(int identificationNumber, String name, String surname, String patronymic, String address, long phoneNumber, int medicalCardNumber, String diagnosis) {
         this.identificationNumber = identificationNumber;
         this.name = name;
         this.surname = surname;

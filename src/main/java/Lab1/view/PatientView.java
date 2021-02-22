@@ -1,6 +1,6 @@
 package Lab1.view;
 
-import Lab1.model.PatientInfo;
+import Lab1.entities.PatientInfo;
 
 public class PatientView {
     public final String INPUT_DATA = "Enter the number what action you want to perform: \n1)To view all values \n2)Search patients by diagnosis \n3)Search patients by medical card number \n4)To Exit \n";

@@ -1,6 +1,6 @@
 package Lab1.controller;
 
-import Lab1.model.PatientInfo;
+import Lab1.entities.PatientInfo;
 import Lab1.model.PatientModel;
 import Lab1.view.PatientView;
 
@@ -25,14 +25,19 @@ public class PatientController {
 
         PatientInfo[] patientInfos = new PatientInfo[0];
 
-        if (action.equalsIgnoreCase("1")) {
-            patientInfos = showAllPatientValues();
-        } else if (action.equalsIgnoreCase("2")) {
-            patientInfos = showPatientsByDiagnosis();
-        } else if (action.equalsIgnoreCase("3")) {
-            patientInfos = showPatientsByCardNumber();
-        } else {
-            view.printMessage(view.WRONG_INPUT_DATA);
+        switch (action) {
+            case "1":
+                patientInfos = showAllPatientValues();
+                break;
+            case "2":
+                patientInfos = showPatientsByDiagnosis();
+                break;
+            case "3":
+                patientInfos = showPatientsByCardNumber();
+                break;
+            default:
+                view.printMessage(view.WRONG_INPUT_DATA);
+                break;
         }
 
         if (patientInfos.length > 0) {

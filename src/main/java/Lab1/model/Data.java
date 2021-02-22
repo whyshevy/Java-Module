@@ -1,7 +1,7 @@
 package Lab1.model;
 
 class Data {
-    final int[] identificationNumber = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} ;
+    final int[] identificationNumber = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20} ;
     final String[] surname = {"Wilson", "King", "Reeves", "Kirk", "Hopkins", "Bulgakov" , "Di Caprio", "Maison", "Freeman", "Cardi"};
     final String[] name = {"Gordon", "Leonardo", "Keanu", "Michael", "Elizabeth", "Steve", "Martin", "Julia", "Robert", "Dredd"};
     final String[] patronymic = {"Johnson", "Jackson", "Peterson"};

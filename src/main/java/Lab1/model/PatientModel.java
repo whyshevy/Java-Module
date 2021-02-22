@@ -1,5 +1,7 @@
 package Lab1.model;
 
+import Lab1.entities.PatientInfo;
+
 import java.util.Comparator;
 import java.util.stream.Stream;
 
@@ -103,23 +105,3 @@ public class PatientModel {
         }
     }
 }
-//    public PatientInfo[] getPatientsByMedicalCard(String cardNumber, String secondCardNumber) {
-//        int firstNumber = Integer.parseInt(cardNumber);
-//        int secondNumber = Integer.parseInt(secondCardNumber);
-//        if (firstNumber > secondNumber) {
-//            return Stream.of(patientsInfos).filter(patientInfo ->
-//                    Integer.parseInt(patientInfo.getMedicalCardNumber()) < firstNumber
-//                            && Integer.parseInt(patientInfo.getMedicalCardNumber()) > secondNumber)
-//                    .sorted(Comparator.comparingInt(o -> Integer.parseInt(o.getMedicalCardNumber())))
-//                    .toArray(PatientInfo[]::new);
-//
-//        }
-//        return Stream.of(patientsInfos).filter(patientInfo ->
-//                Integer.parseInt(patientInfo.getMedicalCardNumber()) > firstNumber
-//                        && Integer.parseInt(patientInfo.getMedicalCardNumber()) < secondNumber)
-//                .sorted(Comparator.comparingInt(o -> Integer.parseInt(o.getMedicalCardNumber())))
-//                .toArray(PatientInfo[]::new);
-//    }
-
-
-
