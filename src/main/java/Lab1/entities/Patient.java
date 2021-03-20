@@ -1,7 +1,7 @@
 package Lab1.entities;
 
 
-public class PatientInfo {
+public class Patient {
     private int identificationNumber;
     private String name;
     private String surname;
@@ -11,7 +11,7 @@ public class PatientInfo {
     private int medicalCardNumber;
     private String diagnosis;
 
-    public PatientInfo(int identificationNumber, String name, String surname, String patronymic, String address, long phoneNumber, int medicalCardNumber, String diagnosis) {
+    public Patient(int identificationNumber, String name, String surname, String patronymic, String address, long phoneNumber, int medicalCardNumber, String diagnosis) {
         this.identificationNumber = identificationNumber;
         this.name = name;
         this.surname = surname;
@@ -88,7 +88,7 @@ public class PatientInfo {
 
     @Override
     public String toString() {
-        return String.format("%20s%20s%20s%30s%30s%30s%30s%30s",
+        return String.format("%20s|%20s|%20s|%30s|%30s|%30s|%30s|%30s|",
                 identificationNumber,
                 name,
                 surname,

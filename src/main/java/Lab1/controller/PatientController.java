@@ -1,6 +1,8 @@
 package Lab1.controller;
 
-import Lab1.entities.PatientInfo;
+import Lab1.controller.exceptions.MedicalCardNumberIsOutOfBoundsException;
+import Lab1.controller.validator.Validator;
+import Lab1.entities.Patient;
 import Lab1.model.PatientModel;
 import Lab1.view.PatientView;
 
@@ -8,61 +10,77 @@ import java.util.Scanner;
 
 public class PatientController {
     private static final Scanner sc = new Scanner(System.in);
-    private final PatientView view = new PatientView();
+    private final PatientView patientView = new PatientView();
     private final PatientModel patientModel = new PatientModel(10);
 
-    public void start() {
-        String action;
-        view.printMessage(view.INPUT_DATA);
-        while(!sc.hasNext("4")) {
-            action = sc.nextLine();
-            calculate(action);
-        }
-        view.printMessage(view.END_DATA);
-    }
+    public void calculate(String action) {
 
-    private void calculate(String action) {
-
-        PatientInfo[] patientInfos = new PatientInfo[0];
+        Patient[] patients = new Patient[]{};
 
         switch (action) {
             case "1":
-                patientInfos = showAllPatientValues();
+                patients = showAllPatientValues();
                 break;
             case "2":
-                patientInfos = showPatientsByDiagnosis();
+                patients = showPatientsByDiagnosis();
                 break;
             case "3":
-                patientInfos = showPatientsByCardNumber();
+                patients = showPatientsByCardNumber();
                 break;
             default:
-                view.printMessage(view.WRONG_INPUT_DATA);
+                patientView.printMessage(patientView.WRONG_INPUT_DATA);
                 break;
         }
 
-        if (patientInfos.length > 0) {
-            view.printMessageAndResult(view.RESULT + System.lineSeparator() + view.COLUMNS, patientInfos);
-            view.printMessage(System.lineSeparator());
-        } else {
-            view.printMessage(view.NO_DATA + System.lineSeparator());
+        if (patients != null) {
+            if (patients.length > 0) {
+                patientView.printMessageAndResult(patientView.RESULT + System.lineSeparator() + patientView.COLUMNS, patients);
+                patientView.printMessage(System.lineSeparator());
+            } else {
+                patientView.printMessage(patientView.NO_DATA + System.lineSeparator());
+            }
         }
-
-        view.printMessage(view.INPUT_DATA);
+        patientView.printMessage(patientView.INPUT_DATA);
     }
 
-    private PatientInfo[] showAllPatientValues() {
+    private Patient[] showAllPatientValues() {
         return patientModel.getAllPatientValues();
     }
-    private PatientInfo[] showPatientsByDiagnosis() {
-        view.printMessage(view.SELECT_DIAGNOSIS);
+
+    private Patient[] showPatientsByDiagnosis() {
+        patientView.printMessage(patientView.SELECT_DIAGNOSIS);
         String diagnosis = sc.nextLine();
         return patientModel.getPatientsByDiagnosis(diagnosis);
     }
-    private PatientInfo[] showPatientsByCardNumber() {
-        view.printMessage(view.SELECT_MEDICAL_CARD_NUMBER_FIRST);
-        String firstCardNumber = sc.nextLine();
-        view.printMessage(view.SELECT_MEDICAL_CARD_NUMBER_SECOND);
-        String secondCardNumber = sc.nextLine();
-        return patientModel.getPatientsByMedicalCardRange(firstCardNumber, secondCardNumber);
+
+    private Patient[] showPatientsByCardNumber() {
+        String firstCardNumber;
+        String secondCardNumber;
+        try {
+            patientView.printMessage(patientView.SELECT_MEDICAL_CARD_NUMBER_FIRST);
+            if (sc.hasNextLine()) {
+                firstCardNumber = sc.nextLine();
+            }
+            else {
+                throw new NumberFormatException(PatientView.NUMBER_EXCEPTION);
+            }
+            patientView.printMessage(patientView.SELECT_MEDICAL_CARD_NUMBER_SECOND);
+            if (sc.hasNextInt()) {
+                secondCardNumber = sc.nextLine();
+            }
+            else {
+                throw new NumberFormatException(PatientView.NUMBER_EXCEPTION);
+            }
+            int firstParseRange = Integer.parseInt(firstCardNumber);
+            int secondParseRange = Integer.parseInt(secondCardNumber);
+            Validator.checkMedicalCardNumbersThatNotExists(firstParseRange, secondParseRange);
+            return patientModel.getPatientsByMedicalCardRange(firstParseRange, secondParseRange);
+        } catch (NumberFormatException e) {
+            System.err.println(PatientView.NUMBER_EXCEPTION);
+        } catch (MedicalCardNumberIsOutOfBoundsException e) {
+            System.err.println(PatientView.OUT_OF_RANGE_EXCEPTION);
+        }
+        return null;
     }
 }
+
