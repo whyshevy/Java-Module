@@ -1,7 +1,9 @@
 package Lab1.entities;
 
 
-public class Patient {
+import java.io.Serializable;
+
+public class Patient implements Serializable {
     private int identificationNumber;
     private String name;
     private String surname;
@@ -10,6 +12,8 @@ public class Patient {
     private long phoneNumber;
     private int medicalCardNumber;
     private String diagnosis;
+
+    private static final long serialVersionUID = 10L;
 
     public Patient(int identificationNumber, String name, String surname, String patronymic, String address, long phoneNumber, int medicalCardNumber, String diagnosis) {
         this.identificationNumber = identificationNumber;
@@ -20,6 +24,10 @@ public class Patient {
         this.phoneNumber = phoneNumber;
         this.medicalCardNumber = medicalCardNumber;
         this.diagnosis = diagnosis;
+    }
+
+    public Patient() {
+
     }
 
     public int getIdentificationNumber() {

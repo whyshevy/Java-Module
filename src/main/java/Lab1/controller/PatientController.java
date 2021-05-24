@@ -6,12 +6,19 @@ import Lab1.entities.Patient;
 import Lab1.model.PatientModel;
 import Lab1.view.PatientView;
 
+import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class PatientController {
     private static final Scanner sc = new Scanner(System.in);
+    public PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
     private final PatientView patientView = new PatientView();
     private final PatientModel patientModel = new PatientModel(10);
+
+    public PatientController() throws FileNotFoundException {
+    }
+
 
     public void calculate(String action) {
 
@@ -20,15 +27,22 @@ public class PatientController {
         switch (action) {
             case "1":
                 patients = showAllPatientValues();
+                Arrays.asList(patients).forEach((patient -> out.println(patient)));
+                out.println("\n");
                 break;
             case "2":
                 patients = showPatientsByDiagnosis();
+                Arrays.asList(patients).forEach((patient -> out.println(patient)));
+                out.println("\n");
                 break;
             case "3":
                 patients = showPatientsByCardNumber();
+                Arrays.asList(patients).forEach((patient -> out.println(patient)));
+                out.println("\n");
                 break;
             default:
                 patientView.printMessage(patientView.WRONG_INPUT_DATA);
+                Arrays.asList(patients).forEach((patient -> out.println(patient)));
                 break;
         }
 
@@ -41,6 +55,24 @@ public class PatientController {
             }
         }
         patientView.printMessage(patientView.INPUT_DATA);
+    }
+
+    public void transferData() throws IOException {
+        FileOutputStream os = new FileOutputStream("data.ser");
+        ObjectOutputStream oos = new ObjectOutputStream(os);
+        oos.writeObject(patientModel.getAllPatientValues());
+        oos.close();
+    }
+
+    public Object loadData() throws IOException, ClassNotFoundException {
+        FileInputStream is = new FileInputStream("data.ser");
+        ObjectInputStream ois = new ObjectInputStream(is);
+
+        var object = ois.readObject();
+
+        ois.close();
+
+        return object;
     }
 
     private Patient[] showAllPatientValues() {

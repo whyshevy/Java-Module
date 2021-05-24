@@ -7,6 +7,12 @@ public class PatientView {
 
     public final String END_DATA = "See you next time!";
 
+    public final String SAVE_OR_NOT = "Do you want to save data? (Y/N)";
+
+    public final String SAVE_COMPLETED = "Successfully saved!";
+
+    public final String SAVE_ERROR = "There is an error, occured while saving! Try again!";
+
     public final String WRONG_INPUT_DATA = "Wrong input! ";
 
     public static final String OUT_OF_RANGE_EXCEPTION = "You entered wrong range of existing numbers or maybe you entered the same number twice!";
