@@ -8,6 +8,7 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
+import org.apache.log4j.xml.DOMConfigurator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +19,7 @@ public class InputUtility {
     private PatientView patientView = new PatientView();
     private Scanner sc = new Scanner(System.in);
     private PatientController patientController = new PatientController();
-    static Logger logger = Logger.getLogger(PatientController.class);
+    static Logger logger = Logger.getLogger(InputUtility.class);
     private Patient patient = new Patient();
 
     public InputUtility() throws FileNotFoundException {
@@ -32,13 +33,10 @@ public class InputUtility {
             action = sc.nextLine();
             patientController.calculate(action);
         }
-
-        FileAppender appender = new FileAppender(new SimpleLayout(), "log.xml");
-        logger.setLevel(Level.DEBUG);
-        logger.addAppender(appender);
-        logger.debug(patient.toString());
-        patientView.printMessage(patientView.END_DATA);
+        DOMConfigurator.configure("log4j.xml");
         patientController.out.close();
         patientController.transferData();
+        logger.debug("Log4j appender configuration is successfull !!! \n");
+        patientView.printMessage(patientView.END_DATA);
     }
 }

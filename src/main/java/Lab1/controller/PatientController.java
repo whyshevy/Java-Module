@@ -14,7 +14,7 @@ public class PatientController {
     private static final Scanner sc = new Scanner(System.in);
     public PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
     private final PatientView patientView = new PatientView();
-    private final PatientModel patientModel = new PatientModel(10);
+    private final PatientModel patientModel = new PatientModel();
 
     public PatientController() throws FileNotFoundException {
     }
@@ -37,9 +37,11 @@ public class PatientController {
                 break;
             case "3":
                 patients = showPatientsByCardNumber();
-                Arrays.asList(patients).forEach((patient -> out.println(patient)));
-                out.println("\n");
-                break;
+                if (patients != null) {
+                    Arrays.asList(patients).forEach((patient -> out.println(patient)));
+                    out.println("\n");
+                } else
+                    break;
             default:
                 patientView.printMessage(patientView.WRONG_INPUT_DATA);
                 Arrays.asList(patients).forEach((patient -> out.println(patient)));
@@ -64,16 +66,16 @@ public class PatientController {
         oos.close();
     }
 
-    public Object loadData() throws IOException, ClassNotFoundException {
+    public void loadData() throws IOException, ClassNotFoundException {
         FileInputStream is = new FileInputStream("data.ser");
         ObjectInputStream ois = new ObjectInputStream(is);
 
         var object = ois.readObject();
 
         ois.close();
-
-        return object;
+        patientModel.patientsInfos = (Patient[]) object;
     }
+
 
     private Patient[] showAllPatientValues() {
         return patientModel.getAllPatientValues();
@@ -92,15 +94,13 @@ public class PatientController {
             patientView.printMessage(patientView.SELECT_MEDICAL_CARD_NUMBER_FIRST);
             if (sc.hasNextLine()) {
                 firstCardNumber = sc.nextLine();
-            }
-            else {
+            } else {
                 throw new NumberFormatException(PatientView.NUMBER_EXCEPTION);
             }
             patientView.printMessage(patientView.SELECT_MEDICAL_CARD_NUMBER_SECOND);
             if (sc.hasNextInt()) {
                 secondCardNumber = sc.nextLine();
-            }
-            else {
+            } else {
                 throw new NumberFormatException(PatientView.NUMBER_EXCEPTION);
             }
             int firstParseRange = Integer.parseInt(firstCardNumber);
