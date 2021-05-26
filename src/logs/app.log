@@ -1,0 +1,4 @@
+2021-05-26 20:20:51,280 INFO L.c.PatientController [main] Data from data.ser is loaded
+2021-05-26 20:20:53,410 WARN L.c.PatientController [main] User entered wrong or non-existent action
+2021-05-26 20:20:54,075 WARN L.c.PatientController [main] User entered wrong or non-existent action
+2021-05-26 20:20:58,418 INFO L.c.PatientController [main] User exit the program

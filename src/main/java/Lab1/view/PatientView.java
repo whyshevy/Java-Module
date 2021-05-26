@@ -7,6 +7,26 @@ public class PatientView {
 
     public final String END_DATA = "See you next time!";
 
+    public final String LOG_ALL_VALUES = "User viewed table of all values";
+
+    public final String LOG_SEARCHED_PATIENTS_BY_DIAGNOSIS = "User searched patients by certain diagnosis";
+
+    public final String LOG_SEARCHED_PATIENTS_BY_MEDICAL_CARD = "User searched patients in range of medical card numbers";
+
+    public final String LOG_INTERMEDIATE_DATA = "Intermediate data loaded into output.txt file";
+
+    public final String LOG_SERIAZABLE_FILE_NOT_FOUND = "File data.ser is missing";
+
+    public final String LOG_DATA_IS_LOADED = "Data from data.ser is loaded";
+
+    public final String LOG_USER_ENTERD_WRONG_ACTION = "User entered wrong or non-existent action";
+
+    public final String LOG_USER_FINISHED = "User exit the program";
+
+    public final String LOG_USER_ENTERED_WRONG_FORMAT_VALUES = "User entered wrong format values in medical card number search action";
+
+    public final String LOG_USER_ENTERED_WRONG_RANGE_OR_SAME_NUM = "User entered wrong range of existing numbers or maybe entered the same number twice!";
+
     public final String WRONG_INPUT_DATA = "Wrong input!";
 
     public static final String OUT_OF_RANGE_EXCEPTION = "You entered wrong range of existing numbers or maybe you entered the same number twice!";
